@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personajes de Harry Potter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="mt-5">Personajes de Harry Potter</h1>
+        <table class="table mt-4">
+            <thead>
+                <tr>
+                    <th scope="col">Imagen</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Especie</th>
+                    <th scope="col">Género</th>
+                    <th scope="col">Casa</th>
+                    <th scope="col">Año de nacimiento</th>
+                </tr>
+            </thead>
+            <tbody id="tabla">
+
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $.getJSON("personajes.json", function(datosTabla) {
+                const tabla = document.getElementById('tabla');
+
+                datosTabla.forEach(personajes => {
+                    const fila = document.createElement('tr');
+                    const imagen = document.createElement('td');
+                    imagen.innerHTML = `<img src="${personajes.image}"  width="100">`;
+                    fila.appendChild(imagen);
+
+                    const nombre = document.createElement('td');
+                    nombre.textContent = personajes.name;
+                    fila.appendChild(nombre);
+
+                    const especie = document.createElement('td');
+                    especie.textContent = personajes.species;
+                    fila.appendChild(especie);
+
+                    const genero = document.createElement('td');
+                    genero.textContent = personajes.gender;
+                    fila.appendChild(genero);
+
+                    const casa = document.createElement('td');
+                    casa.textContent = personajes.house;
+                    fila.appendChild(casa);
+
+                    const anoNacimiento = document.createElement('td');
+                    anoNacimiento.textContent = personajes.yearOfBirth;
+                    fila.appendChild(anoNacimiento);
+
+                    tabla.appendChild(fila);
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
